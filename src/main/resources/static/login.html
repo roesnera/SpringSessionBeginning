@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-  <form id="loginForm" class="form-signin" method="post" action="/register">
+  <form id="loginForm" class="form-signin" method="post" action="/login">
     <h2 class="form-signin-heading">Please sign in</h2>
     <p>
       <label for="username" class="sr-only">Username</label>
@@ -23,25 +23,25 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   </form>
 </div>
-<script>
-  const form = document.getElementById("loginForm");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const loginDto = {
-      username,
-      password,
-    }
-    const success = await fetch("/login/process", {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "POST",
-      body: JSON.stringify(loginDto)
-    });
-    // const successData = await success.json();
-    console.log(success);
-  })
-</script>
+<!--<script>-->
+<!--  const form = document.getElementById("loginForm");-->
+<!--  form.addEventListener("submit", async (e) => {-->
+<!--    e.preventDefault();-->
+<!--    const username = document.getElementById("username").value;-->
+<!--    const password = document.getElementById("password").value;-->
+<!--    const loginDto = {-->
+<!--      username,-->
+<!--      password,-->
+<!--    }-->
+<!--    const success = await fetch("/login/process", {-->
+<!--      headers: {-->
+<!--        "Content-Type": "application/json"-->
+<!--      },-->
+<!--      method: "POST",-->
+<!--      body: JSON.stringify(loginDto)-->
+<!--    });-->
+<!--    // const successData = await success.json();-->
+<!--    console.log(success);-->
+<!--  })-->
+<!--</script>-->
 </body></html>

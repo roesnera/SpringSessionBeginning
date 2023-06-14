@@ -1,5 +1,7 @@
 package com.adamaroesner.springsessionattempt.config;
 
+import com.adamaroesner.springsessionattempt.service.UserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,7 +14,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration {
+
+    private final UserDetailsService userDetailsService;
 
     @Bean
     public static PasswordEncoder passwordEncoder(){
@@ -29,11 +34,12 @@ public class SecurityConfiguration {
                     authorize.requestMatchers(HttpMethod.POST, "/register", "/register/new").permitAll();
                     authorize.requestMatchers("/secured/**").authenticated();
                 })
-//                .httpBasic(Customizer.withDefaults())
-//                .formLogin(Customizer.withDefaults())
+                .userDetailsService(userDetailsService)
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
                 .formLogin(form -> {
                     form.loginPage("/login.html");
-//                    form.loginProcessingUrl("/login/process");
+                    form.loginProcessingUrl("/login");
                     form.defaultSuccessUrl("/secured/hello");
                 })
 //                .logout(logout -> logout.permitAll())
